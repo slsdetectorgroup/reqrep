@@ -1,0 +1,36 @@
+package:
+  name: reqrep
+  version: "{{ load_setup_py_data().version }}"
+
+build:
+  noarch: python
+
+
+source:
+  path: ..
+
+requirements:
+  build:
+    - python 
+    - setuptools
+
+  run:
+    - python
+    - rich
+
+test:
+  source_files:
+    - tests/
+  imports:
+    - reqrepq
+  commands:
+    - pytest ./tests 
+  requires:
+    - pytest
+
+
+about:
+  home: https://github.com/slsdetectorgroup/reqrep
+  license: MIT
+  license_family: MIT
+  summary: Simple remote procedure call using ZMQ REQ/REP
