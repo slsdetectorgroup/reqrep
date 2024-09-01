@@ -5,7 +5,6 @@ class MyServer(Server):
         self._ft = 0.0
         super().__init__(port)
         
-
     def closeShutter(self):
         print("Closing shutter")
         return
@@ -17,6 +16,15 @@ class MyServer(Server):
     
     def getFilterThickness(self):
         return self._ft
+    
+    @property
+    def filter_thickness(self):
+        return self._ft
+    
+    @filter_thickness.setter
+    def filter_thickness(self, val):
+        self.setFilterThickness(val)
+        
 
 if __name__ == "__main__":
     s = MyServer(3030)

@@ -10,17 +10,36 @@ class Client:
         self.port = port
         self.verbose = verbose
         self._commands = [it for it in dir(wraps) if callable(getattr(wraps, it)) and not it.startswith('_')]
+        self._members = [it for it in dir(wraps) if not callable(getattr(wraps, it)) and not it.startswith('_')]
+        
         if self.verbose:
             print(f"Client for {wraps.__name__} at {self.host}:{self.port}")
+
+    def __setattr__(self, name, value):
+        if name in ['host', 'port', 'verbose', '_commands', '_members']:
+            self.__dict__[name] = value
+        else:
+            self._send_message(name, value)
 
     def __getattr__(self, name):
         if name in self._commands:
             return partial(self._send_message, name)
+        elif name in self._members:
+            if self.ping():
+                return self._send_message(name)
+            else:
+                raise TimeoutError(f"Timeout while waiting for reply from {self.host}:{self.port}")
         else:
             return self.__getattribute__(name)
         
+    def ping(self):
+        try:
+            return self._send_message('ping', timeout_ms=100) == 'pong'
+        except TimeoutError:
+            return False
+    
     def __dir__(self):
-        return self._commands
+        return self._commands + self._members
     
     def _send_message(self, cmd, *args, timeout_ms = -1):
         cmd = cmd.encode(cm.encoding)
