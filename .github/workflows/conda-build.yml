@@ -16,8 +16,8 @@ jobs:
           conda-build-version: 24.7.1
           python-version: ${{ matrix.python-version }}
       - name: Conda info
-        shell: bash -el {0}
+        shell: bash
         run: conda info
-      - name: Conda list
-        shell: pwsh
-        run: conda list
+      - name: Build
+        shell: bash
+        run: conda build conda-recipe
