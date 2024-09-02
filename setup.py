@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="reqrep",
-    version= '2024.8.31',
+    version= '2024.9.1',
     author="Erik Frojdh",
     author_email="erik.frojdh@psi.ch",
     description="Simple remote procedure call using ZMQ REQ/REP",

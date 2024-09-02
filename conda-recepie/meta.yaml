@@ -17,14 +17,15 @@ requirements:
   run:
     - python
     - rich
+    - pyzmq
 
 test:
   source_files:
     - tests/
   imports:
-    - reqrepq
+    - reqrep
   commands:
-    - pytest ./tests 
+    - python -m pytest
   requires:
     - pytest
 

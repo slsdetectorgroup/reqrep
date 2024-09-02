@@ -17,6 +17,15 @@ class MyServer(Server):
     def getFilterThickness(self):
         return self._ft
     
+    def getSomeList(self):
+        return [1, 'two', 3]
+    
+    def getSomeDict(self):
+        return {'one': 1, 'two': 2, 'three': 3}
+    
+    def raiseException(self):
+        raise ValueError("This is an exception")
+    
     @property
     def filter_thickness(self):
         return self._ft
