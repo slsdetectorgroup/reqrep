@@ -23,4 +23,4 @@ jobs:
         run: pwd
       - name: Build
         shell: bash -el {0}
-        run: conda build .
+        run: conda build ../conda-recipe
