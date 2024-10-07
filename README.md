@@ -1,6 +1,11 @@
 # reqrep
 Simple zmq/json remote interface
 
+### Installation
+
+```bash
+conda install reqrep -c slsdetectorgroup
+```
 
 ### Implementing the server
 ```python
